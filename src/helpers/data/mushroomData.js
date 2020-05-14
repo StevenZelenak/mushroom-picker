@@ -55,7 +55,7 @@ const mushrooms = [{
 {
   id: 'mushroom6',
   name: 'Red Shroom',
-  description: 'Does a red shroom taste like an apple?',
+  description: 'Does a red shroom taste like an apple? Most likely not...',
   imgUrl: 'https://cdn.themix.org.uk/uploads/2012/09/fly-agaric-mushroom.jpg',
   isMagic: false,
   isPoisonous: false,
@@ -64,7 +64,7 @@ const mushrooms = [{
 {
   id: 'mushroom7',
   name: 'Green Shroom',
-  description: 'Legend say if you eat it, you get an extra life. Unless you are a cat.',
+  description: 'Legend says if you eat it, you get an extra life. Unless you are a cat.',
   imgUrl: 'https://i.pinimg.com/originals/49/7f/55/497f55cda07cf64e08fd5ac3e3716c15.jpg',
   isMagic: false,
   isPoisonous: false,
@@ -154,7 +154,7 @@ const mushrooms = [{
 {
   id: 'mushroom17',
   name: 'Shroom Person',
-  description: 'I do not even know how this even exist.',
+  description: 'I do not even know how this exist.',
   imgUrl: 'https://images-na.ssl-images-amazon.com/images/I/51W01js0xWL._AC_.jpg',
   isMagic: false,
   isPoisonous: false,
