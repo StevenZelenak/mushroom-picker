@@ -1,18 +1,25 @@
 import React from 'react';
 import './App.scss';
 import mushroomData from '../helpers/data/mushroomData';
+import Forest from '../components/Forest/Forest';
 
 class App extends React.Component {
+  state = {
+    mushrooms: [],
+  }
+
+  // get data
   componentDidMount() {
     const mushrooms = mushroomData.getMushrooms();
-    console.error('mushrooms', mushrooms);
+    this.setState({ mushrooms });
   }
+  // use data
 
   render() {
     return (
       <div className="App">
-        <h2>INSIDE APP COMPONENT</h2>
-        <button className="btn btn-info">Pick a mushroom</button>
+        <h1>Mushroom Game</h1>
+        <Forest mushrooms={this.state.mushrooms}/>
       </div>
     );
   }
