@@ -191,8 +191,66 @@ const basket = [{
 
 const getMushrooms = () => mushrooms;
 const getBasket = () => basket;
+const pickAShroom = () => {
+  const mushroomArray = getMushrooms();
+  const basketArrray = getBasket();
+  const randomShroom = mushroomArray[Math.floor(Math.random() * mushroomArray.length)];
+  console.error(randomShroom);
+  basketArrray.push(randomShroom);
+};
+const checkPoison = () => {
+  getBasket().forEach((mushroom) => {
+    if (mushroom.isPoisonous === true) {
+      if (getBasket().length === 0) {
+        // eslint-disable-next-line no-alert
+        window.alert('You just got poisoned so you lose 2 Shrooms!');
+        getBasket().length = 0;
+      } else if (getBasket().length === 1) {
+        // eslint-disable-next-line no-alert
+        window.alert('You just got poisoned so you lose 2 Shrooms!');
+        getBasket().length -= 1;
+      } else if (getBasket().length === 2) {
+        // eslint-disable-next-line no-alert
+        window.alert('You just got poisoned so you lose 2 Shrooms!');
+        getBasket().length -= 2;
+      } else if (getBasket().length > 2) {
+        // eslint-disable-next-line no-alert
+        window.alert('You just got poisoned so you lose 2 Shrooms!');
+        getBasket().length -= 3;
+      }
+    }
+  });
+};
+
+const checkDeadly = () => {
+  getBasket().forEach((mushroom) => {
+    if (mushroom.isDeadly === true) {
+      // eslint-disable-next-line no-alert
+      window.alert('You just lost all your Shrooms!');
+      getBasket().length = 0;
+    }
+  });
+};
+
+const checkMagic = () => {
+  getBasket().forEach((mushroom) => {
+    if (mushroom.isMagic === true) {
+      // eslint-disable-next-line no-alert
+      window.alert('You just pulled a magic shroom! Gain one of each normal Shroom!');
+      getMushrooms().forEach((allmushrooms) => {
+        if (!allmushrooms.isDeadly && !allmushrooms.isMagic && !allmushrooms.isPoisonous) {
+          getBasket().push(allmushrooms);
+        }
+      });
+    }
+  });
+};
 
 export default {
   getMushrooms,
   getBasket,
+  pickAShroom,
+  checkPoison,
+  checkDeadly,
+  checkMagic,
 };
