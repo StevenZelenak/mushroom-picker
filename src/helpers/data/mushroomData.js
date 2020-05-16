@@ -195,7 +195,6 @@ const pickAShroom = () => {
   const mushroomArray = getMushrooms();
   const basketArrray = getBasket();
   const randomShroom = mushroomArray[Math.floor(Math.random() * mushroomArray.length)];
-  console.error(randomShroom);
   basketArrray.push(randomShroom);
 };
 const checkPoison = () => {
@@ -246,6 +245,14 @@ const checkMagic = () => {
   });
 };
 
+const checkIfWon = () => {
+  const basketArray = [...new Set(getBasket())];
+  if (basketArray.length >= 15) {
+    // eslint-disable-next-line no-alert
+    window.alert('You collected at least one of each Shroom! You Won! Refresh the page to play again!');
+  }
+};
+
 export default {
   getMushrooms,
   getBasket,
@@ -253,4 +260,5 @@ export default {
   checkPoison,
   checkDeadly,
   checkMagic,
+  checkIfWon,
 };

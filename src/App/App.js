@@ -34,6 +34,8 @@ class App extends React.Component {
     const basket = mushroomData.getBasket();
     // We recall the state of basket, which basically reprints basket on the pager. simialer to printToDom
     this.setState({ basket });
+    // Check if we won the game
+    mushroomData.checkIfWon();
   };
 
   render() {
