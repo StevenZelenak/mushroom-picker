@@ -10,7 +10,7 @@ class Basket extends React.Component {
     return (
       <div className="Basket">
         <h2>Basket</h2>
-        <div id="holdsShrooms">
+        <div className="d-flex flex-wrap" id="holdsShrooms">
           {buildBasket}
         </div>
       </div>
