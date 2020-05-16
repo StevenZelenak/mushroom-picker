@@ -179,7 +179,15 @@ const mushrooms = [{
   isDeadly: false,
 }];
 
-const basket = [];
+const basket = [{
+  id: 'mushroom19',
+  name: 'Ocean Shroom',
+  description: 'Sometime mistaken for a jellyfish.',
+  imgUrl: 'https://i.pinimg.com/474x/e9/d0/55/e9d055576bec6a8aba2bb902d3c26789.jpg',
+  isMagic: false,
+  isPoisonous: false,
+  isDeadly: false,
+}];
 
 const getMushrooms = () => mushrooms;
 const getBasket = () => basket;
