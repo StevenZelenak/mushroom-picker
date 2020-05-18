@@ -45,6 +45,20 @@ class App extends React.Component {
         <button className='my-2 btn btn-success' onClick={this.pickAShroomEvent}>Pick a Shroom</button>
         <Basket basket={this.state.basket}/>
         <Forest mushrooms={this.state.mushrooms}/>
+        <div id="modal-poison" className="bg-modal">
+          <div className="modal-content">
+          <div className="close">+</div>
+            <img class="img-modal" src="https://i.imgur.com/R8GINvY.jpg" alt=""/>
+            <h2 className="my-1">YOU JUST GOT POISONED!!! YOU LOSE 2 SHROOMS!</h2>
+          </div>
+        </div>
+        <div id="modal-magic" className="bg-modal">
+          <div className="modal-content">
+          <div className="close">+</div>
+            <img class="img-modal" src="https://i.makeagif.com/media/8-07-2016/y4JmOR.gif" alt=""/>
+            <h2 className="my-1">YOU JUST WON!</h2>
+          </div>
+        </div>
       </div>
     );
   }

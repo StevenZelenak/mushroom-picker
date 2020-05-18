@@ -178,43 +178,53 @@ const mushrooms = [{
   isPoisonous: false,
   isDeadly: false,
 }];
+let count = 0;
 
-const basket = [{
-  id: 'mushroom19',
-  name: 'Ocean Shroom',
-  description: 'Sometime mistaken for a jellyfish.',
-  imgUrl: 'https://i.pinimg.com/474x/e9/d0/55/e9d055576bec6a8aba2bb902d3c26789.jpg',
-  isMagic: false,
-  isPoisonous: false,
-  isDeadly: false,
-}];
+const getCount = () => count;
+
+const setCount = (countReturn) => {
+  count = countReturn;
+};
+
+const basket = [];
 
 const getMushrooms = () => mushrooms;
+
 const getBasket = () => basket;
+
 const pickAShroom = () => {
   const mushroomArray = getMushrooms();
   const basketArrray = getBasket();
   const randomShroom = mushroomArray[Math.floor(Math.random() * mushroomArray.length)];
   basketArrray.push(randomShroom);
 };
+
 const checkPoison = () => {
   getBasket().forEach((mushroom) => {
     if (mushroom.isPoisonous === true) {
       if (getBasket().length === 0) {
-        // eslint-disable-next-line no-alert
-        window.alert('You just got poisoned so you lose 2 Shrooms!');
+        document.querySelector('#modal-poison').style.display = 'flex';
+        document.querySelector('.close').addEventListener('click', () => {
+          document.querySelector('.bg-modal').style.display = 'none';
+        });
         getBasket().length = 0;
       } else if (getBasket().length === 1) {
-        // eslint-disable-next-line no-alert
-        window.alert('You just got poisoned so you lose 2 Shrooms!');
+        document.querySelector('#modal-poison').style.display = 'flex';
+        document.querySelector('.close').addEventListener('click', () => {
+          document.querySelector('.bg-modal').style.display = 'none';
+        });
         getBasket().length -= 1;
       } else if (getBasket().length === 2) {
-        // eslint-disable-next-line no-alert
-        window.alert('You just got poisoned so you lose 2 Shrooms!');
+        document.querySelector('#modal-poison').style.display = 'flex';
+        document.querySelector('.close').addEventListener('click', () => {
+          document.querySelector('.bg-modal').style.display = 'none';
+        });
         getBasket().length -= 2;
       } else if (getBasket().length > 2) {
-        // eslint-disable-next-line no-alert
-        window.alert('You just got poisoned so you lose 2 Shrooms!');
+        document.querySelector('#modal-poison').style.display = 'flex';
+        document.querySelector('.close').addEventListener('click', () => {
+          document.querySelector('.bg-modal').style.display = 'none';
+        });
         getBasket().length -= 3;
       }
     }
@@ -248,8 +258,10 @@ const checkMagic = () => {
 const checkIfWon = () => {
   const basketArray = [...new Set(getBasket())];
   if (basketArray.length >= 15) {
-    // eslint-disable-next-line no-alert
-    window.alert('You collected at least one of each Shroom! You Won! Refresh the page to play again!');
+    document.querySelector('#modal-magic').style.display = 'flex';
+    document.querySelector('.close').addEventListener('click', () => {
+      document.querySelector('#modal-magic').style.display = 'none';
+    });
   }
 };
 
@@ -261,4 +273,6 @@ export default {
   checkDeadly,
   checkMagic,
   checkIfWon,
+  getCount,
+  setCount,
 };
