@@ -186,7 +186,7 @@ const setCount = (countReturn) => {
   count = countReturn;
 };
 
-const basket = [];
+let basket = [];
 
 const getMushrooms = () => mushrooms;
 
@@ -196,73 +196,51 @@ const pickAShroom = () => {
   const mushroomArray = getMushrooms();
   const basketArrray = getBasket();
   const randomShroom = mushroomArray[Math.floor(Math.random() * mushroomArray.length)];
-  basketArrray.push(randomShroom);
+  let status = 'none';
+  if (randomShroom.isPoisonous === true) {
+    status = 'poisonus';
+    checkPoison();
+  } else if (randomShroom.isDeadly === true) {
+    status = 'deadly';
+    checkDeadly();
+  } else if (randomShroom.isMagic === true) {
+    status = 'won';
+    checkMagic();
+  } else {
+    basketArrray.push(randomShroom);
+    checkIfWon() ? status = 'won' : status = 'none';
+  }
+  return status;
 };
 
 const checkPoison = () => {
-  getBasket().forEach((mushroom) => {
-    if (mushroom.isPoisonous === true) {
-      if (getBasket().length === 0) {
-        document.querySelector('#modal-poison').style.display = 'flex';
-        document.querySelector('.close').addEventListener('click', () => {
-          document.querySelector('.bg-modal').style.display = 'none';
-        });
-        getBasket().length = 0;
-      } else if (getBasket().length === 1) {
-        document.querySelector('#modal-poison').style.display = 'flex';
-        document.querySelector('.close').addEventListener('click', () => {
-          document.querySelector('.bg-modal').style.display = 'none';
-        });
-        getBasket().length -= 1;
-      } else if (getBasket().length === 2) {
-        document.querySelector('#modal-poison').style.display = 'flex';
-        document.querySelector('.close').addEventListener('click', () => {
-          document.querySelector('.bg-modal').style.display = 'none';
-        });
-        getBasket().length -= 2;
-      } else if (getBasket().length > 2) {
-        document.querySelector('#modal-poison').style.display = 'flex';
-        document.querySelector('.close').addEventListener('click', () => {
-          document.querySelector('.bg-modal').style.display = 'none';
-        });
-        getBasket().length -= 3;
-      }
-    }
-  });
+  if (getBasket().length === 1) {
+    basket.pop();
+  } else if (getBasket().length >= 2) {
+    basket.pop();
+    basket.pop();
+  }
 };
 
+
 const checkDeadly = () => {
-  getBasket().forEach((mushroom) => {
-    if (mushroom.isDeadly === true) {
-      // eslint-disable-next-line no-alert
-      window.alert('You just lost all your Shrooms!');
-      getBasket().length = 0;
-    }
-  });
+  basket = [];
 };
 
 const checkMagic = () => {
-  getBasket().forEach((mushroom) => {
-    if (mushroom.isMagic === true) {
-      // eslint-disable-next-line no-alert
-      window.alert('You just pulled a magic shroom! Gain one of each normal Shroom!');
-      getMushrooms().forEach((allmushrooms) => {
-        if (!allmushrooms.isDeadly && !allmushrooms.isMagic && !allmushrooms.isPoisonous) {
-          getBasket().push(allmushrooms);
-        }
-      });
+  getMushrooms().forEach((allmushrooms) => {
+    if (!allmushrooms.isDeadly && !allmushrooms.isMagic && !allmushrooms.isPoisonous) {
+      basket.push(allmushrooms);
     }
   });
 };
 
 const checkIfWon = () => {
   const basketArray = [...new Set(getBasket())];
-  if (basketArray.length >= 15) {
-    document.querySelector('#modal-magic').style.display = 'flex';
-    document.querySelector('.close').addEventListener('click', () => {
-      document.querySelector('#modal-magic').style.display = 'none';
-    });
+  if (basketArray.length === 15) {
+    return true;
   }
+  return false;
 };
 
 export default {
