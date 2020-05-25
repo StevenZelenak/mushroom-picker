@@ -1,8 +1,13 @@
 import React from 'react';
 import './Forest.scss';
 import Mushrooms from '../Mushrooms/Mushrooms';
+import mushroomShape from '../../helpers/propz/mushroomShape';
 
 class Forest extends React.Component {
+  static propTypes = {
+    mushroom: mushroomShape.mushroomShape,
+  }
+
   render() {
     // modifying the ui
     const makeMushrooms = this.props.mushrooms.map((mushroom) => (
