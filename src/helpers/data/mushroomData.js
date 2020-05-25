@@ -178,79 +178,69 @@ const mushrooms = [{
   isPoisonous: false,
   isDeadly: false,
 }];
+let count = 0;
 
-const basket = [{
-  id: 'mushroom19',
-  name: 'Ocean Shroom',
-  description: 'Sometime mistaken for a jellyfish.',
-  imgUrl: 'https://i.pinimg.com/474x/e9/d0/55/e9d055576bec6a8aba2bb902d3c26789.jpg',
-  isMagic: false,
-  isPoisonous: false,
-  isDeadly: false,
-}];
+const getCount = () => count;
+
+const setCount = (countReturn) => {
+  count = countReturn;
+};
+
+let basket = [];
 
 const getMushrooms = () => mushrooms;
+
 const getBasket = () => basket;
+
 const pickAShroom = () => {
   const mushroomArray = getMushrooms();
   const basketArrray = getBasket();
   const randomShroom = mushroomArray[Math.floor(Math.random() * mushroomArray.length)];
-  basketArrray.push(randomShroom);
-};
-const checkPoison = () => {
-  getBasket().forEach((mushroom) => {
-    if (mushroom.isPoisonous === true) {
-      if (getBasket().length === 0) {
-        // eslint-disable-next-line no-alert
-        window.alert('You just got poisoned so you lose 2 Shrooms!');
-        getBasket().length = 0;
-      } else if (getBasket().length === 1) {
-        // eslint-disable-next-line no-alert
-        window.alert('You just got poisoned so you lose 2 Shrooms!');
-        getBasket().length -= 1;
-      } else if (getBasket().length === 2) {
-        // eslint-disable-next-line no-alert
-        window.alert('You just got poisoned so you lose 2 Shrooms!');
-        getBasket().length -= 2;
-      } else if (getBasket().length > 2) {
-        // eslint-disable-next-line no-alert
-        window.alert('You just got poisoned so you lose 2 Shrooms!');
-        getBasket().length -= 3;
-      }
-    }
-  });
+  let status = 'none';
+  if (randomShroom.isPoisonous === true) {
+    status = 'poisonus';
+    checkPoison();
+  } else if (randomShroom.isDeadly === true) {
+    status = 'deadly';
+    checkDeadly();
+  } else if (randomShroom.isMagic === true) {
+    status = 'won';
+    checkMagic();
+  } else {
+    basketArrray.push(randomShroom);
+    checkIfWon() ? status = 'won' : status = 'none';
+  }
+  return status;
 };
 
+const checkPoison = () => {
+  if (getBasket().length === 1) {
+    basket.pop();
+  } else if (getBasket().length >= 2) {
+    basket.pop();
+    basket.pop();
+  }
+};
+
+
 const checkDeadly = () => {
-  getBasket().forEach((mushroom) => {
-    if (mushroom.isDeadly === true) {
-      // eslint-disable-next-line no-alert
-      window.alert('You just lost all your Shrooms!');
-      getBasket().length = 0;
-    }
-  });
+  basket = [];
 };
 
 const checkMagic = () => {
-  getBasket().forEach((mushroom) => {
-    if (mushroom.isMagic === true) {
-      // eslint-disable-next-line no-alert
-      window.alert('You just pulled a magic shroom! Gain one of each normal Shroom!');
-      getMushrooms().forEach((allmushrooms) => {
-        if (!allmushrooms.isDeadly && !allmushrooms.isMagic && !allmushrooms.isPoisonous) {
-          getBasket().push(allmushrooms);
-        }
-      });
+  getMushrooms().forEach((allmushrooms) => {
+    if (!allmushrooms.isDeadly && !allmushrooms.isMagic && !allmushrooms.isPoisonous) {
+      basket.push(allmushrooms);
     }
   });
 };
 
 const checkIfWon = () => {
   const basketArray = [...new Set(getBasket())];
-  if (basketArray.length >= 15) {
-    // eslint-disable-next-line no-alert
-    window.alert('You collected at least one of each Shroom! You Won! Refresh the page to play again!');
+  if (basketArray.length === 15) {
+    return true;
   }
+  return false;
 };
 
 export default {
@@ -261,4 +251,6 @@ export default {
   checkDeadly,
   checkMagic,
   checkIfWon,
+  getCount,
+  setCount,
 };
