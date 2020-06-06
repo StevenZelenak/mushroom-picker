@@ -10,8 +10,4 @@ This project was an exploration into React. You pick mushrooms randomly, some ha
 
 ## How to Run
 
-1. Clone down this repo
-1. Make sure you have http-server installed via npm. If not get it
-   [here](https://www.npmjs.com/package/http-server)
-1. On your command line run `hs -p 8080`
-1. In your browser go to `http://localhost:8080`
+#### Just click [here](https://mushroom-picker-f8c05.web.app) to see the website!
